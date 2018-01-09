@@ -15,6 +15,10 @@ public class App
 		
 		jdbc.getConnection();
 		
+		
+		
+		
+		/**
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Voulez vous modifier la BDD ? (y/n)");
 		String str = sc.nextLine();
@@ -30,5 +34,6 @@ public class App
 			jdbc.setInfos(id, nom);
 		}
 		System.out.println("Bonne journée !");
+    }**/
     }
 }
