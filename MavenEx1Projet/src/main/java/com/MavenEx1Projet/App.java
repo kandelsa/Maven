@@ -49,11 +49,7 @@ public class App
 		List<Record> recordVilleAPI = null;
 		recordVilleAPI = villes.getRecords();
 		
-		for(Record rip : recordVilleAPI) {
-//			if(rip.getFields().getCodeCommuneInsee().equals("01001"))
-				System.out.println(rip.getFields().getCodeCommuneInsee());
-
-				
+		for(Record rip : recordVilleAPI) {				
 			if(rip.getFields().getCoordonneesGps() != null)
 				JDBCConfigurationSol2.setInfos(rip.getFields().getCodeCommuneInsee(), rip.getFields().getNomDeLaCommune(), rip.getFields().getCodePostal(),
 					rip.getFields().getLibellDAcheminement(),  rip.getFields().getCoordonneesGps().get(0) , rip.getFields().getCoordonneesGps().get(1));
