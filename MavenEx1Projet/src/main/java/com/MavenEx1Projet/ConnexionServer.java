@@ -47,6 +47,7 @@ public class ConnexionServer {
 				json += output;
 			}			
 			conn.disconnect();
+			br.close();
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
