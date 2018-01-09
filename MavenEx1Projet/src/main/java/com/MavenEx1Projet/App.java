@@ -1,6 +1,10 @@
 package com.MavenEx1Projet;
 
+import java.util.List;
 import java.util.Scanner;
+
+import ville.Record;
+import ville.Ville;
 
 /**
  * Hello world!
@@ -15,7 +19,7 @@ public class App
 		
 		jdbc.getConnection();
 		
-		
+		maj();
 		
 		
 		/**
@@ -35,5 +39,28 @@ public class App
 		}
 		System.out.println("Bonne journée !");
     }**/
+    }
+    
+    public static void maj(){
+		
+    	GestionJson gestion = new GestionJson();		
+		Ville villes = gestion.conversionJsontoVille(ConnexionServer.getAll());
+		
+		List<Record> recordVilleAPI = null;
+		recordVilleAPI = villes.getRecords();
+		
+		for(Record rip : recordVilleAPI) {
+//			if(rip.getFields().getCodeCommuneInsee().equals("01001"))
+				System.out.println(rip.getFields().getCodeCommuneInsee());
+
+				
+			if(rip.getFields().getCoordonneesGps() != null)
+				JDBCConfigurationSol2.setInfos(rip.getFields().getCodeCommuneInsee(), rip.getFields().getNomDeLaCommune(), rip.getFields().getCodePostal(),
+					rip.getFields().getLibellDAcheminement(),  rip.getFields().getCoordonneesGps().get(0) , rip.getFields().getCoordonneesGps().get(1));
+			else
+				JDBCConfigurationSol2.setInfos(rip.getFields().getCodeCommuneInsee(), rip.getFields().getNomDeLaCommune(), rip.getFields().getCodePostal(),
+						rip.getFields().getLibellDAcheminement());
+
+		}
     }
 }

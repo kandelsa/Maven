@@ -11,7 +11,7 @@ import ville.Ville;
  */
 public class GestionJson {
 
-	private Ville[] villes;
+	private Ville villes;
 	private String json;
 
 	/**
@@ -21,9 +21,9 @@ public class GestionJson {
 	 *            le json � transformer
 	 * @return la ville
 	 */
-	public Ville[] conversionJsontoTrain(String stringOfJson) {
+	public Ville conversionJsontoVille(String stringOfJson) {
 		Gson gson = new Gson();
-		villes = gson.fromJson(stringOfJson, Ville[].class);
+		villes = gson.fromJson(stringOfJson, Ville.class);
 		return villes;
 	}
 
@@ -33,7 +33,7 @@ public class GestionJson {
 	 * @param ville
 	 * @return le json
 	 */
-	public String conversionTraintoJson(Ville ville) {
+	public String conversionVilletoJson(Ville ville) {
 		Gson gson = new Gson();
 		json = gson.toJson(ville);
 		return json;

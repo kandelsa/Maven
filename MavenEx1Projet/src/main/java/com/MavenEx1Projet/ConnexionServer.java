@@ -18,7 +18,7 @@ import java.net.URL;
 public class ConnexionServer {
 	
 	/**
-	 * M�thode permettant de r�cup�rer les villes de la BDD 
+	 * M�thode permettant de r�cup�rer les villes de l'API REST 
 	 * en envoyant une requ�te de type GET au serveur 
 	 * 
 	 * @param objet le type d'objet que l'on souhaite 
@@ -26,12 +26,12 @@ public class ConnexionServer {
 	 * @return le json correspondant � l'objet souhait�
 	 */
 	//probl�me accent ici
-	public static String getAll(String objet) {
+	public static String getAll() {
 		String json = "";
 		String output = "";
 		try {
 
-			URL url = new URL("https://datanova.legroupe.laposte.fr/api/records/1.0/search/?dataset=laposte_hexasmal&rows=20&OpenDataSoft=alexandreheitz");
+			URL url = new URL("http://datanova.legroupe.laposte.fr/api/records/1.0/search/?dataset=laposte_hexasmal&rows=10000&OpenDataSoft=alexandreheitz");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
