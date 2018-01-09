@@ -63,4 +63,56 @@ public class JDBCConfigurationSol2 {
         return connection;
     }
     
+    public static Connection setInfos(int id, String nom, String CP, String ligne, String lat, String longi){		
+
+    	try {
+    	    //System.out.println("Connection : "+ DB_CONNECTION);
+
+			Class.forName(DB_DRIVER);
+
+            if(connection == null) {
+                connection = DriverManager.getConnection(DB_CONNECTION);
+            }
+            ResultSet rset = null;
+			Statement stmt = connection.createStatement();
+			if (stmt.execute("UPDATE ville_france SET Nom_commune = "+nom+ ", Code_postal = "+CP +", "
+					+ "Ligne_5 = " +ligne+" , Latitude = " +lat+", Longitude = "+longi+" WHERE Code_commune_INSEE = " +id)) {
+				rset = stmt.getResultSet();
+			} else {
+				rset = null;
+			}
+			
+			rset.close();
+			stmt.close();
+    	} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        return connection;
+    }
+    
+    public static Connection setInfos(String id, String nom){		
+
+    	try {
+    	    //System.out.println("Connection : "+ DB_CONNECTION);
+
+			Class.forName(DB_DRIVER);
+
+            if(connection == null) {
+                connection = DriverManager.getConnection(DB_CONNECTION);
+            }
+			Statement stmt = connection.createStatement();
+			if (stmt.execute("UPDATE ville_france SET Nom_commune = '"+nom+ "' WHERE Code_commune_INSEE = " +id)) {
+			}
+			
+			stmt.close();
+    	} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        return connection;
+    }
+    
 }
