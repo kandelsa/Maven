@@ -1,9 +1,5 @@
 package com.MavenEx1Projet;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import java.sql.*;
 
 public class JDBCConfigurationSol2 {
@@ -126,7 +122,7 @@ public class JDBCConfigurationSol2 {
             }
 			Statement stmt = connection.createStatement();
 			String requete = "UPDATE ville_france SET Nom_commune = '"+nom+ "', Code_postal = '"+CP +"',  Libelle_acheminement = '"
-					+Libelle_acheminement+"', Latitude = '" +lat+"', Longitude = '"+longi+"'WHERE Code_commune_INSEE = " +id;
+					+Libelle_acheminement+"', Latitude = '" +lat+"', Longitude = '"+longi+"'WHERE Code_commune_INSEE = '" +id+"'";
 			if (stmt.execute(requete)) {
 			}
 			stmt.close();
@@ -138,7 +134,7 @@ public class JDBCConfigurationSol2 {
         return connection;
     }
     
-public static Connection setInfos(String id, String nom, String CP, String Libelle_acheminement){		
+    public static Connection setInfos(String id, String nom, String CP, String Libelle_acheminement){		
     	
     	
     	try {
@@ -153,6 +149,46 @@ public static Connection setInfos(String id, String nom, String CP, String Libel
 					+Libelle_acheminement+"' WHERE Code_commune_INSEE = " +id;
 			if (stmt.execute(requete)) {
 			}
+			stmt.close();
+    	} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        return connection;
+    }
+    
+    	public static Connection doublons(){		
+    	
+    	
+    	try {
+    	    //System.out.println("Connection : "+ DB_CONNECTION);
+
+			Class.forName(DB_DRIVER);
+            if(connection == null) {
+                connection = DriverManager.getConnection(DB_CONNECTION);
+            }
+            ResultSet rset = null;
+			Statement stmt = connection.createStatement();
+			String requete = "SELECT   COUNT(Nom_commune) AS nbr_doublon, Nom_commune,Code_commune_INSEE " + 
+					"FROM   ville_france GROUP BY Nom_commune HAVING   COUNT(Nom_commune) > 1";
+			if (stmt.execute(requete)) {
+				rset = stmt.getResultSet();
+			} else {
+				rset = null;
+			}
+			
+			String code = null;
+			String nom = null;
+			int doublons = 0;
+			
+			while (rset.next()) {
+				nom = rset.getString("Nom_commune");
+				code = rset.getString("Code_commune_INSEE");
+				doublons = Integer.parseUnsignedInt(rset.getString("nbr_doublon"));
+				System.out.println(nom + " " + code + " " + doublons);
+			}
+			
 			stmt.close();
     	} catch (ClassNotFoundException e) {
 			e.printStackTrace();

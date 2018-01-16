@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
-
 /**
  * @author KANDEL Sarah
  * @author HEITZ Alexandre

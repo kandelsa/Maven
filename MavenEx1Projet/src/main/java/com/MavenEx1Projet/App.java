@@ -49,7 +49,7 @@ public class App
 		List<Record> recordVilleAPI = null;
 		recordVilleAPI = villes.getRecords();
 		
-		for(Record rip : recordVilleAPI) {				
+		for(Record rip : recordVilleAPI) {
 			if(rip.getFields().getCoordonneesGps() != null)
 				JDBCConfigurationSol2.setInfos(rip.getFields().getCodeCommuneInsee(), rip.getFields().getNomDeLaCommune(), rip.getFields().getCodePostal(),
 					rip.getFields().getLibellDAcheminement(),  rip.getFields().getCoordonneesGps().get(0) , rip.getFields().getCoordonneesGps().get(1));
@@ -58,5 +58,8 @@ public class App
 						rip.getFields().getLibellDAcheminement());
 
 		}
+		System.out.println("azertyuiop");
+		JDBCConfigurationSol2.doublons();
+		System.out.println("qsdfghjklm");
     }
 }
