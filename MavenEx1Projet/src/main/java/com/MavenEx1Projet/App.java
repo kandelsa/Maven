@@ -44,11 +44,9 @@ public class App {
 
 		List<String> inseeVilleBDD = JDBCConfigurationSol2.getConnectionBDD();
 		String[] villeManquante = new String[7];
-
-		
-		
 		
 		for (Record rip : recordVilleAPI) {
+			//update des informations
 			if (rip.getFields().getCoordonneesGps() != null)
 				JDBCConfigurationSol2.setInfos(rip.getFields().getCodeCommuneInsee(),
 						rip.getFields().getNomDeLaCommune(), rip.getFields().getCodePostal(),
@@ -58,8 +56,9 @@ public class App {
 				JDBCConfigurationSol2.setInfos(rip.getFields().getCodeCommuneInsee(),
 						rip.getFields().getNomDeLaCommune(), rip.getFields().getCodePostal(),
 						rip.getFields().getLibellDAcheminement());
-
-			if (!JDBCConfigurationSol2.trouver(rip.getFields().getCodeCommuneInsee(), inseeVilleBDD)) {
+			
+			//vérification : est-ce que la ville existe dans la BDD
+			if (!JDBCConfigurationSol2.trouver(rip.getFields().getCodeCommuneInsee())) {
 				villeManquante[0] = rip.getFields().getCodeCommuneInsee();
 				villeManquante[1] = rip.getFields().getNomDeLaCommune();
 				villeManquante[2] = rip.getFields().getCodePostal();
