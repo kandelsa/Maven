@@ -6,5 +6,6 @@ public class Addition {
 	}
 	public Character lireSymbole() {
 		return '-';
+		
 	}
 }
