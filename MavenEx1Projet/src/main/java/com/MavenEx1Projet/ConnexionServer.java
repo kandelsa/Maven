@@ -17,7 +17,7 @@ import java.net.URL;
 public class ConnexionServer {
 	
 	/**
-	 * M�thode permettant de r�cup�rer les villes de l'API REST 
+	 * M�thode permettant de r�cup�rer les villes  
 	 * en envoyant une requ�te de type GET au serveur 
 	 * 
 	 * @param objet le type d'objet que l'on souhaite 
@@ -30,7 +30,7 @@ public class ConnexionServer {
 		String output = "";
 		try {
 
-			URL url = new URL("http://datanova.legroupe.laposte.fr/api/records/1.0/search/?dataset=laposte_hexasmal&rows=10000&OpenDataSoft=alexandreheitz");
+			URL url = new URL("http://datanova.legroupe.laposte.fr/api/records/1.0/search/?dataset=laposte_hexasmal&rows=100&OpenDataSoft=alexandreheitz");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
